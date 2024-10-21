@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+int main() {
+    int num1 = -3, num2 = 9;
+    
+    cout << "Absolute value: " << num1 << ": " << ABS(num1) << endl;
+    cout << "Maximum value: " << num1 << " and " << num2 << ": " << MAX(num1, num2) << endl;
+    
+    return 0;
+}
