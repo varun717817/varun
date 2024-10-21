@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string cities[4] = {"newyork", "losangles", "chicago", "newjersy"};
+    char startingLetter = 'n';
+
+    cout << "Cities starting with letter " << startingLetter << ": " << endl;
+    for (int i = 0; i < 4; i++) {
+        if (cities[i][0] == startingLetter) {
+            cout << cities[i] << endl;
+        }
+    }
+
+    return 0;
+}
