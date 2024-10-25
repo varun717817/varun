@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+template<typename KeyType, typename ValueType>
+class CustomMap {
+private:
+    vector<pair<KeyType, ValueType>> entries; // Vector to store key-value pairs
+
+public:
+    // Adds or updates a key-value pair in the custom map
+    void insert(KeyType key, ValueType value) {
+        for (auto& entry : entries) {
+            if (entry.first == key) { // If key exists, update the value
+                entry.second = value;
+                return;
+            }
+        }
+        entries.push_back(make_pair(key, value)); // If key doesn't exist, add new pair
+    }
+
+    // Overloaded operator[] to access value by key
+    ValueType& operator[](KeyType key) {
+        for (auto& entry : entries) {
+            if (entry.first == key) {
+                return entry.second;
+            }
+        }
+        // If key is not found, insert a new pair with default value
+        entries.push_back(make_pair(key, ValueType()));
+        return entries.back().second;
+    }
+
+    // Overloaded << operator to print the custom map
+    friend ostream& operator<<(ostream& os, const CustomMap& customMap) {
+        os << "Key : Value" << endl;
+        for (const auto& entry : customMap.entries) {
+            os << entry.first << " : " << entry.second << endl;
+        }
+        return os;
+    }
+};
+
+int main() {
+    CustomMap<int, string> codeMap; // CustomMap for integer keys and string values
+
+    codeMap.insert(10, "DeviceA");
+    codeMap.insert(20, "DeviceB");
+    codeMap.insert(30, "DeviceC");
+    codeMap.insert(40, "DeviceD");
+
+    string deviceName = codeMap[20]; // Access value by key
+    cout << deviceName << endl;
+
+    cout << codeMap; // Print the entire CustomMap
+
+    return 0;
+}
