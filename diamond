@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+class D {
+private:
+    int _id;
+public:
+    D(int id) : _id{id} {
+        cout << "D Constructed" << endl;
+    }
+    ~D() {
+        cout << "D Destructed" << endl;
+    }
+}; // Device
+
+class P : public virtual D {
+public:
+    P() : D(100) {
+        cout << "P Constructed" << endl;
+    }
+    ~P() {
+        cout << "P Destructed" << endl;
+    }
+}; // Printer
+
+class S : public virtual D {
+public:
+    S() : D(200) {
+        cout << "S Constructed" << endl;
+    }
+    ~S() {
+        cout << "S Destructed" << endl;
+    }
+}; // Scanner
+
+class PS : public P, public S {
+public:
+    PS() : D(1000), P(), S() { // Initialize D first, then P and S
+        cout << "PS Constructed" << endl;
+    }
+    ~PS() {
+        cout << "PS Destructed" << endl;
+    }
+}; // PrinterScanner
+
+int main() {
+    PS psInstance; // Create an instance of PS
+    return 0; // End of main
+}
