@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+// Inline function to calculate absolute value
+inline int ABS(int x) {
+    return (x < 0) ? -x : x;
+}
+
+// Inline function to find the maximum of two values
+template <typename T>
+inline T MAX(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    int num1 = -10;
+    int x = 10, y = 20;
+
+    // Using ABS function to find the absolute value
+    cout << "Absolute value of " << num1 << " is " << ABS(num1) << endl;
+    cout << "Greater of " << x << " and " << y << " is " << MAX(x, y) << endl;
+
+    // Example with floating-point numbers
+    double a = -15.5, b = 12.3;
+    cout << "Absolute value of " << a << " is " << ABS(a) << endl;
+    cout << "Greater of " << a << " and " << b << " is " << MAX(a, b) << endl;
+
+    return 0;
+}
