@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+// Template function for bubble sort
+template <typename T>
+void bubbleSort(T arr[], int n) {
+    // Loop through all elements of the array
+    for (int i = 0; i < n - 1; ++i) {
+        // Last i elements are already in place
+        for (int j = 0; j < n - i - 1; ++j) {
+            // Swap if the element found is greater than the next element
+            if (arr[j] > arr[j + 1]) {
+                T temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to print an array
+template <typename T>
+void printArray(T arr[], int size) {
+    for (int i = 0; i < size; ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Original array: \n";
+    printArray(arr, n);
+
+    bubbleSort(arr, n);
+
+    cout << "Sorted array: \n";
+    printArray(arr, n);
+
+    // Example with a different data type: float
+    float arrFloat[] = {64.5, 34.2, 25.1, 12.3, 22.7, 11.0, 90.8};
+    int nFloat = sizeof(arrFloat) / sizeof(arrFloat[0]);
+
+    cout << "Original float array: \n";
+    printArray(arrFloat, nFloat);
+
+    bubbleSort(arrFloat, nFloat);
+
+    cout << "Sorted float array: \n";
+    printArray(arrFloat, nFloat);
+
+    return 0;
+}
