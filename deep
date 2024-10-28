@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+class B {
+    int _state;
+public:
+    void setState(int state) {
+        _state = state;
+    }
+    int getState() const {
+        return _state;
+    }
+};
+
+class A {
+    B* bInstance;
+public:
+    // Constructor
+    A(int state) {
+        bInstance = new B();
+        bInstance->setState(state);
+    }
+
+    // Copy Constructor
+    A(const A& ref) {
+        bInstance = new B();
+        bInstance->setState(ref.getState());
+    }
+
+    // Destructor to free allocated memory
+    ~A() {
+        delete bInstance;
+    }
+
+    // Copy Assignment Operator
+    A& operator=(const A& ref) {
+        if (this != &ref) { // Self-assignment check
+            delete bInstance; // Free existing resource
+            bInstance = new B(); // Allocate new memory
+            bInstance->setState(ref.getState());
+        }
+        return *this;
+    }
+
+    // Accessor methods
+    int getState() const {
+        return bInstance->getState();
+    }
+    void setState(int newValue) {
+        bInstance->setState(newValue);
+    }
+};
+
+int main() {
+    A aInstance{100};
+    cout << "aInstance state: " << aInstance.getState() << endl;
+
+    A newInstance(aInstance); // Copy Constructor
+    cout << "newInstance state (after copy): " << newInstance.getState() << endl;
+
+    newInstance.setState(500);
+    cout << "aInstance state (after modifying newInstance): " << aInstance.getState() << endl;
+    cout << "newInstance state (after modification): " << newInstance.getState() << endl;
+
+    return 0;
+}
