@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+class IICEngine {
+public:
+    // Pure virtual methods
+    virtual void crank() = 0;
+    virtual void halt() = 0;
+};
+
+// Low Level Module, Service
+// VericoreEngine implements the contract i.e. IICEngine
+class VericoreEngine : public IICEngine {
+public:
+    void crank() override {
+        cout << "VericoreEngine cranked." << endl;
+    }
+    
+    void halt() override {
+        cout << "VericoreEngine halted." << endl;
+    }
+};
+
+// High Level Module, Consumer, Client
+class TataCar {
+    IICEngine* engine; // Pointer to an engine
+
+public:
+    TataCar(IICEngine* eng) : engine(eng) {} // Constructor to initialize the engine
+
+    void start() {
+        engine->crank(); // Start the engine
+    }
+    
+    void stop() {
+        engine->halt(); // Stop the engine
+    }
+};
+
+int main() {
+    VericoreEngine vericoreEngine; // Create an instance of VericoreEngine
+    TataCar hexaInstance(&vericoreEngine); // Pass the engine to TataCar
+
+    hexaInstance.start(); // Start the car
+    hexaInstance.stop(); // Stop the car
+
+    return 0; // End of main
+}
