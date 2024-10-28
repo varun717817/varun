@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class genClass {
+protected:
+    int name;
+    string location;
+    int model;
+    
+public:
+    // Default constructor
+    genClass() {
+        cout << "Scan the information" << endl;
+    }
+
+    // Parameterized constructor
+    genClass(int type) {
+        cout << "Print the information for model: " << type << endl;
+    }
+};
+
+class scanner : public genClass {
+public:
+    // You may want to implement specific scanner functionalities here
+};
+
+class printer : public genClass {
+public:
+    // Constructor that initializes the base class with a model type
+    printer(int x) : genClass(x) {
+        cout << "Printer initialized with model: " << x << endl;
+    }
+    
+    // Example method (optional)
+    void print() {
+        cout << "Printing the information" << endl;
+    }
+};
+
+int main() {
+    scanner instancee; // Create an instance of scanner
+    printer de(1);     // Create an instance of printer with model 1
+
+    // Optional: Call print method for the printer instance
+    de.print();
+
+    return 0; // End of main
+}
