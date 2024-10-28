@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+class D {
+private:
+    int _id;
+public:
+    D(int id) : _id{id} {
+        cout << "D Constructed" << endl;
+    }
+    ~D() {
+        cout << "D Destructed" << endl;
+    }
+}; // Device
+
+class P : public D {
+public:
+    P() : D(100) {
+        cout << "P Constructed" << endl;
+    }
+    ~P() {
+        cout << "P Destructed" << endl;
+    }
+    void pm() {
+        cout << "Print Method Invoked" << endl;
+    }
+}; // Printer
+
+class S : public D {
+public:
+    S() : D(200) {
+        cout << "S Constructed" << endl;
+    }
+    ~S() {
+        cout << "S Destructed" << endl;
+    }
+    void sm() {
+        cout << "Scan Method Invoked" << endl;
+    }
+}; // Scanner
+
+class PS : public D {
+private:
+    P pInstance; // Instance of Printer
+    S sInstance; // Instance of Scanner
+
+public:
+    PS() : D(1000) {
+        cout << "PS Constructed" << endl;
+    }
+    ~PS() {
+        cout << "PS Destructed" << endl;
+    }
+    void pm() {
+        pInstance.pm(); // Delegation to Printer
+    }
+    void sm() {
+        sInstance.sm(); // Delegation to Scanner
+    }
+}; // PrinterScanner
+
+int main() {
+    PS psInstance; // Create PrinterScanner instance
+    psInstance.pm(); // Call print method
+    psInstance.sm(); // Call scan method
+    return 0; // End of main
+}
